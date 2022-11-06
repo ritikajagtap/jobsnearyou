@@ -1,0 +1,25 @@
+doctype html
+html 
+    head
+        block head
+            meta(charset="UTF-16")
+            meta(name='viewport' content='width=device-width, initial-scale=1.0')
+            title DART3000 | Opportunities for all
+            link(rel="stylesheet" href="/css/style1.css")
+            link(rel="shortcut icon" type="image/png" href='/img/favicon.png')
+            link(rel="stylesheet" href='https://fonts.googleapis.com/css?family=Lato:300,300i,700')
+
+    body 
+        //navbar
+        include _navbar
+                
+        //CONTENT
+        block content
+            div This is the base
+        //footer
+        include _footer
+
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js')
+        script(src='/js/mapbox.js')
+        script(src='/js/login.js')
+

@@ -1,0 +1,81 @@
+extends base
+mixin reviewCard(review)
+    .reviews__card
+        .reviews__avatar
+            img.reviews__avatar-img(src='/img/users/user-7.jpg', alt=`${review.user.name}`)
+            h6.reviews__user=review.user.name
+        p.reviews__text=review.review
+
+block append head
+    script(src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js')
+    link(href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet')
+block content 
+    section.section-header
+        .heading-box
+            img.company-logo(src=`/img/tours/${job.slug}.png`, alt=`${job.slug} logo`)
+
+    section.section-description
+        .overview-box
+            div
+                .overview-box__group
+                    h2.heading-secondary.ma-bt-lg Details
+                        //- .overview-box__detail
+                        //-     svg.overview-box__icon
+                        //-         use(xlink:href='/img/icons.svg#icon-calendar')
+                        //-     span.overview-box__label Applications till
+                        //-     span.overview-box__text=job.startDates[0]
+                        .overview-box__detail
+                            svg.overview-box__icon
+                                use(xlink:href='/img/icons.svg#icon-calendar')
+                            span.overview-box__label Job Type
+                            span.overview-box__text=job.type
+                        .overview-box__detail
+                            svg.overview-box__icon
+                                use(xlink:href='/img/icons.svg#icon-trending-up')
+                            span.overview-box__label Domain
+                            span.overview-box__text IT
+                        .overview-box__detail
+                            svg.overview-box__icon
+                                use(xlink:href='/img/icons.svg#icon-user')
+                            span.overview-box__label Position
+                            span.overview-box__text=job.position
+                        .overview-box__detail
+                            img(src='/img/company.png').card__icon
+                            span.overview-box__label Company type
+                            span.overview-box__text=job.company
+                    .overview-box__group
+                        h2.heading-secondary.ma-bt-lg Recruiters
+                        .overview-box__detail
+                            img.overview-box__img(src='/img/tours/nykaa-ceo.jpg', alt='Lead recruiter')
+                            span.overview-box__text Falguni Nayar
+                        .overview-box__detail
+                            img.overview-box__img(src='/img/tours/leena.jpg', alt='Lead Recruiter')
+                            span.overview-box__text Leena Nair
+
+        .description-box
+            h2.heading-secondary.ma-bt-lg About the company
+            p.description__text Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            p.description__text Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum!
+    section.section-map
+        #map(data-locations=`${JSON.stringify(job.locations)}`)
+        p.map_description This is located on the beautiful campus
+    section.section-reviews
+        .reviews
+            each review in job.reviews
+                +reviewCard(review)
+
+
+    section.section-cta
+        .cta
+            .cta__img.cta__img--logo
+                img(src='/img/logo-white.png', alt='Natours logo')
+            img.cta__img.cta__img--1(src='/img/tour-5-2.jpg', alt='')
+            img.cta__img.cta__img--2(src='/img/tour-5-1.jpg', alt='')
+            .cta__content
+                h2.heading-secondary What are you waiting for?
+                p.cta__text 10 days. 1 adventure. Infinite memories. Make it yours today!
+
+                if user
+                    button.btn.btn--green.span-all-rows Book tour now!
+                else
+                    a.btn.btn--green.span-all-rows(href="/login") Login to book tour
